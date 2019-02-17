@@ -21,6 +21,7 @@ This is a pre-training step. Instead of extracting the context and the neighbori
 Step 3: Negative Sampling.
 ---------------------------
 Before training the embedding matrices, we need to compute the negative sampling probabilities. We use the occurences matrix we computed before to do that (the formula is : w**0.75/sum(w**0.75))
+The negative samples are generated before the beginning of an epoch to increase performance.
 
 
 Step 4: Training.
