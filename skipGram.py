@@ -24,7 +24,7 @@ def text2sentences(path):
         for l in f:
             table = str.maketrans(dict.fromkeys(string.punctuation + '0123456789')) #to remove numbers & punctuation
             sentences.append( tokenizer.tokenize(l.translate(table).lower()) )
-    return sentences[:100000]
+    return sentences
 
 def loadPairs(path):
     data = pd.read_csv(path,delimiter='\t')
@@ -106,7 +106,6 @@ class SkipGram:
 
         for epoch in range(epochs):
             
-            print('EPOCH : ' , epoch)
             neg_ids_epoch = np.random.choice( all_ids , size = (len(D), self.negativeRate * self.winSize) ,  p = neg_probs)
 
             for pos,pair in enumerate(D):
@@ -165,8 +164,11 @@ class SkipGram:
     def load(path):
         
         loaded = np.load(path)
-        self.vocabulary = dict(zip(loaded[0] , loaded[1]))
-        self.Embeddings = loaded[2]
+        obj = SkipGram(sentences = [])
+        obj.vocabulary = dict(zip(loaded[0] , loaded[1]))
+        obj.Embeddings = loaded[2]
+
+        return obj
 
 
 
@@ -182,7 +184,7 @@ if __name__ == '__main__':
     start = time.time()
 
     if not opts.test:
-        epochs , stepsize = 100 , 0.01
+        epochs , stepsize = 1 , 0.01
         sentences = text2sentences(opts.text)
         sg = SkipGram(sentences)
         sg.train(stepsize , epochs)
@@ -198,4 +200,3 @@ if __name__ == '__main__':
     end = time.time()
 
     print(end - start)
-
