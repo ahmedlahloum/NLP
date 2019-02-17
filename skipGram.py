@@ -95,7 +95,7 @@ class SkipGram:
 
 
         # The negative sampling probabilities:
-        all_ids = set(range(len_vocab))
+        all_ids = list(range(len_vocab))
         neg_probs = word_occurences**0.75
         neg_probs = neg_probs / sum(neg_probs)
 
@@ -107,10 +107,9 @@ class SkipGram:
         for epoch in range(epochs):
             
             print('EPOCH : ' , epoch)
-            neg_ids_epoch = np.random.choice( all_ids , size = (len(D), negativeRate * winSize) ,  p = neg_probs)
-            eloss = 0
+            neg_ids_epoch = np.random.choice( all_ids , size = (len(D), self.negativeRate * self.winSize) ,  p = neg_probs)
 
-            for pair in D:
+            for pos,pair in enumerate(D):
 
                 # Negative Ids
                 cont_id = pair[0]
