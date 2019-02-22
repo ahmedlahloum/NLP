@@ -43,7 +43,7 @@ class SkipGram:
 
 
 
-    def train(self,stepsize, epochs):
+    def train(self,stepsize = 0.01, epochs = 50):
 
         # Functions
         def gradients(y , ypred , W , C):
@@ -184,10 +184,9 @@ if __name__ == '__main__':
     start = time.time()
 
     if not opts.test:
-        epochs , stepsize = 1 , 0.01
         sentences = text2sentences(opts.text)
         sg = SkipGram(sentences)
-        sg.train(stepsize , epochs)
+        sg.train()
         sg.save(opts.model)
 
     else:
