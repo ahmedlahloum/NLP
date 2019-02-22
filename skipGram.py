@@ -13,8 +13,8 @@ from nltk.tokenize.treebank import TreebankWordTokenizer
 import time
 
 
-__authors__ = ['author1','author2','author3']
-__emails__  = ['fatherchristmoas@northpole.dk','toothfairy@blackforest.no','easterbunny@greenfield.de']
+__authors__ = ['Ahmed Lahlou Mimi','Hassen Zarrouk','Alaeddine Bouaouaja' , 'Mohamed Dadoune']
+__emails__  = ['ahmed.lahlou-mimi@student.ecp.fr','hassen.zarrouk@student.ecp.fr','alaeddine.bouaouaja@student.ecp.fr' , 'mohamed.dadoune@student.ecp.fr']
 
 def text2sentences(path):
     # feel free to make a better tokenization/pre-processing
@@ -157,7 +157,7 @@ class SkipGram:
         vec1 , vec2 = self.Embeddings[i1] , self.Embeddings[i2]
 
         # We compute the cosine similarity
-        return np.dot(vec1 , vec2)/ ( np.linalg.norm(vec1) * np.linalg.norm(vec2) )
+        return (np.dot(vec1 , vec2)/ ( np.linalg.norm(vec1) * np.linalg.norm(vec2) ) + 1)/2
 
 
     @staticmethod
